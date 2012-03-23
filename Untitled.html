@@ -1,0 +1,55 @@
+<html>
+<head>
+<style type="text/css">
+#venn div{
+    height: 360px;
+    width: 360px;
+    border-radius:180px;
+    -khtml-border-radius:180px;
+    -moz-border-radius:180px;
+    -webkit-border-radius:180px;
+    border: 1px solid #000;
+    display: table;
+    float: left;
+    opacity: .6;
+}
+#venn div:nth-child(1){
+    background-color: #FF0000;
+    color: #FFF;
+    padding-right: 60px;
+    padding-top: 50px;
+}
+
+#venn div:nth-child(2){
+    background-color: #0000FF;
+    color: #FFF;
+    margin-left: -60px;
+    padding-left: 60px;
+    padding-top: 50px;
+}
+#venn #overlap{
+    border: 0;
+    height: 30px;
+    width: 30px;
+    left: -350px;
+    top: 150px;
+    color: #ccc;
+    position: relative;
+    text-align: center;
+    z-index: 10;
+    opacity: 1;
+}
+</style>
+</head>
+<body>
+<div id="venn">
+    <div><p>People Who like Venn Diagrams</p></div>
+    <div><p>People who read my blog articles</p></div>
+    <div id="overlap"><p>Just me.</p></div>
+</div>
+
+
+
+
+</body>
+</html>

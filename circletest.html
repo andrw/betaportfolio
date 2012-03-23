@@ -1,0 +1,105 @@
+<html>
+<head>
+  <style type="text/css">
+  .venn {
+    width:400px;
+    height:400px;
+    border: 1px black solid;
+    border-radius: 200px;
+    opacity: .7;
+    display: inline-block;
+    z-index: 1;
+  }
+
+  #work {
+
+  }
+
+  #play {
+    margin-left: -100px;
+  }
+
+  #middle {
+    width: 100px;
+    height: 260px;
+    border: 1px solid black;
+    z-index: 10;
+    position: absolute;
+    left: 311px;
+    top: 80px;
+    z-index: 2;
+  }
+
+  </style>
+
+  <script>
+  var fillintervalred;
+  var fillintervalblue;
+  var othercolorswork=255;
+  var othercolorsplay = 255;
+
+  function color(el) {
+    element = document.getElementById(el);
+    if(el == "work") {
+      fillintervalred = setInterval("fill(element)", 10);
+    }
+    else if (el =="play") {
+      fillintervalblue = fillintervalred = setInterval("fill(element)", 10);
+    }
+  }
+
+
+  function fill(element) {
+    if(element.id == "work") {
+      element.style.background="rgb(255, "+othercolorswork+", "+othercolorswork+")";
+      othercolorswork-=15;
+      if(othercolorswork < 0) {
+        if(element.id == "work") {
+          clearInterval(fillintervalred);
+        }
+        if(element.id == "play") {
+          clearInterval(fillintervalblue);
+        }
+      }
+    }
+    else if(element.id == "play") {
+      element.style.background="rgb("+othercolorsplay+", "+othercolorsplay+", 255)";
+      othercolorsplay-=15;
+      if(othercolorsplay < 0) {
+        if(element.id == "work") {
+          clearInterval(fillintervalred);
+        }
+        if(element.id == "play") {
+          clearInterval(fillintervalblue);
+        }
+      }
+    }
+  }
+
+  function toWhite(el) {
+    element= document.getElementById(el);
+    unfillinterval = self.setInterval("unfill(element)", 10);
+  }
+
+
+
+function unfill(element) {
+  if(element.id == "work") {
+    element.style.background="rgb(255, "+othercolors+", "+othercolors+")";
+  }
+  else if(element.id == "play") {
+    element.style.background="rgb("+othercolors+", "+othercolors+", 255)";
+  }
+  othercolors+=15;
+  if(othercolors > 255) clearInterval(unfillinterval);
+}
+
+</script>
+</head>
+<body>
+
+  <div class="venn" id="work" onmouseover="color('work');"></div>
+  <div id="play" class="venn" onmouseover="color('play');"></div>
+  <div id="middle" onclick="location.href='#';" style="cursor:pointer;"></div>
+</body>
+</html>
