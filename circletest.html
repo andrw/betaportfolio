@@ -32,74 +32,61 @@
 
   </style>
 
+<script src="jquery.js"></script>
+
   <script>
-  var fillintervalred;
-  var fillintervalblue;
+  var work;
+  var play;
   var othercolorswork=255;
   var othercolorsplay = 255;
+  var colorRed = false;
+  var colorBlue = false;
+  var colorInterval;
 
-  function color(el) {
-    element = document.getElementById(el);
-    if(el == "work") {
-      fillintervalred = setInterval("fill(element)", 10);
-    }
-    else if (el =="play") {
-      fillintervalblue = fillintervalred = setInterval("fill(element)", 10);
-    }
-  }
-
-
-  function fill(element) {
-    if(element.id == "work") {
-      element.style.background="rgb(255, "+othercolorswork+", "+othercolorswork+")";
-      othercolorswork-=15;
-      if(othercolorswork < 0) {
-        if(element.id == "work") {
-          clearInterval(fillintervalred);
-        }
-        if(element.id == "play") {
-          clearInterval(fillintervalblue);
-        }
-      }
-    }
-    else if(element.id == "play") {
-      element.style.background="rgb("+othercolorsplay+", "+othercolorsplay+", 255)";
-      othercolorsplay-=15;
-      if(othercolorsplay < 0) {
-        if(element.id == "work") {
-          clearInterval(fillintervalred);
-        }
-        if(element.id == "play") {
-          clearInterval(fillintervalblue);
-        }
-      }
-    }
-  }
-
-  function toWhite(el) {
-    element= document.getElementById(el);
-    unfillinterval = self.setInterval("unfill(element)", 10);
-  }
-
-
-
-function unfill(element) {
-  if(element.id == "work") {
-    element.style.background="rgb(255, "+othercolors+", "+othercolors+")";
-  }
-  else if(element.id == "play") {
-    element.style.background="rgb("+othercolors+", "+othercolors+", 255)";
-  }
-  othercolors+=15;
-  if(othercolors > 255) clearInterval(unfillinterval);
+  function init() {
+    colorInterval = setInterval("colorIn()", 1);
+    work = document.getElementById('work');
+    play = document.getElementById('play');
 }
 
+  function color(el) {
+    if(el == "work") {
+        colorRed = true;
+    }
+   if (el =="play") {
+      colorBlue = true;
+    }
+  }
+
+// all coloring and logic goes here
+function colorIn() {
+  if(colorRed == true) {
+     work.style.background="rgb(255, "+othercolorswork+", "+othercolorswork+")";
+    othercolorswork-=5;
+  }
+  if(colorBlue == true) {
+  play.style.background="rgb("+othercolorsplay+", "+othercolorsplay+", 255)";
+  othercolorsplay-=5;
+  }
+    if(colorRed == false) {
+work.style.background="rgb("+othercolorsplay+", "+othercolorsplay+", 255)";
+othercolorsplay+=5;
+  }
+}
+
+function toWhite(el) {
+  if(el == "work") {
+    colorRed = false;
+  }
+  else if(el == "play") {
+    colorBlue = false;
+  }
+}
 </script>
 </head>
-<body>
-
-  <div class="venn" id="work" onmouseover="color('work');"></div>
-  <div id="play" class="venn" onmouseover="color('play');"></div>
+<body onload="init();">
+  <div class="venn" id="work" onmouseover="color('work');" onmouseout="toWhite('work');"></div>
+  <div id="play" class="venn" onmouseover="color('play');" onmouseout="toWhite('play');"></div>
   <div id="middle" onclick="location.href='#';" style="cursor:pointer;"></div>
 </body>
 </html>
