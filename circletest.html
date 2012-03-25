@@ -44,7 +44,7 @@
   var colorInterval;
 
   function init() {
-    colorInterval = setInterval("colorIn()", 1);
+    colorInterval = setInterval("colorIn()", 25);
     work = document.getElementById('work');
     play = document.getElementById('play');
 }
@@ -56,22 +56,49 @@
    if (el =="play") {
       colorBlue = true;
     }
+    
+    if(el == "both") {
+    colorRed = true;
+    colorBlue=true;
+    }
+    
   }
 
 // all coloring and logic goes here
 function colorIn() {
   if(colorRed == true) {
      work.style.background="rgb(255, "+othercolorswork+", "+othercolorswork+")";
-    othercolorswork-=5;
+    othercolorswork-=15;
   }
   if(colorBlue == true) {
   play.style.background="rgb("+othercolorsplay+", "+othercolorsplay+", 255)";
-  othercolorsplay-=5;
+  othercolorsplay-=15;
   }
+    
     if(colorRed == false) {
-work.style.background="rgb("+othercolorsplay+", "+othercolorsplay+", 255)";
-othercolorsplay+=5;
+     work.style.background="rgb(255, "+othercolorswork+", "+othercolorswork+")";
+othercolorswork+=15;
+}
+
+    if(colorBlue == false) {
+  play.style.background="rgb("+othercolorsplay+", "+othercolorsplay+", 255)";
+othercolorsplay+=15;
+}
+  
+  if(othercolorswork < 0) {
+  othercolorswork = 0;
   }
+  else if(othercolorswork >255) {
+  othercolorswork = 255;
+  }
+  
+if(othercolorsplay < 0) {
+othercolorsplay = 0;
+}
+else if(othercolorsplay >255) {
+othercolorsplay = 255;
+}
+
 }
 
 function toWhite(el) {
@@ -81,12 +108,19 @@ function toWhite(el) {
   else if(el == "play") {
     colorBlue = false;
   }
+  
+  else if(el == "both") {
+  colorRed = false;
+  colorBlue = false;
+  }
+  
 }
+
 </script>
 </head>
 <body onload="init();">
   <div class="venn" id="work" onmouseover="color('work');" onmouseout="toWhite('work');"></div>
   <div id="play" class="venn" onmouseover="color('play');" onmouseout="toWhite('play');"></div>
-  <div id="middle" onclick="location.href='#';" style="cursor:pointer;"></div>
+  <div id="middle" onclick="location.href='#';" style="cursor:pointer;" onmouseover="color('both');" onmouseout="toWhite('both');" ></div>
 </body>
 </html>
