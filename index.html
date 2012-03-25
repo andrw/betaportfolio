@@ -1,0 +1,13 @@
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+  <script src="coloring.js"></script>
+</head>
+<body onload="init();">
+<div id="container">
+  <div id="workbox" class="vennbox"><div id="work" class="venn" onmouseover="color('work');" onmouseout="toWhite('work');" onclick="location.href='#';"></div></div>
+  <div id="playbox" class="vennbox"><div id="play" class="venn" onmouseover="color('play');" onmouseout="toWhite('play');" onclick="location.href='#';"></div></div>
+  <div id="middle" onclick="location.href='#';" style="cursor:pointer;" onmouseover="color('both');" onmouseout="toWhite('both');" ></div>
+</div>
+</body>
+</html>
